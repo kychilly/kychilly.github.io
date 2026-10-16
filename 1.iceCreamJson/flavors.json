@@ -1,26 +1,26 @@
 [
     {
         "id": 1,
-        "name": "Vanilla Bean",
-        "image": "1.IceCreamImages/vanilla.jpg",
-        "description": "Rich and creamy vanilla ice cream made with real Madagascar vanilla bean specks."
+        "name": "Almond Joy",
+        "image": "1.IceCreamImages/AlmondJoy.jpg",
+        "description": "Coconut Ice cream with Coconut flakes and chocolate covered almonds \n Big Dipper \n Gluten Free"
     },
     {
         "id": 2,
-        "name": "Mint Chocolate Chip",
-        "image": "1.IceCreamImages/mint_chip.jpg",
-        "description": "Refreshing mint ice cream loaded with semi-sweet chocolate chunks."
+        "name": "Blueberry Cheesecake",
+        "image": "1.IceCreamImages/BlueberryCheesecake.jpg",
+        "description": "Cheesecake ice cream with blueberries and graham cracker swirl \n Big Dipper"
     },
     {
         "id": 3,
-        "name": "Strawberry",
-        "image": "1.IceCreamImages/strawberry.jpg",
-        "description": "Made with sweet ripe strawberries blended into a smooth, creamy base."
+        "name": "Cheshire Swamp",
+        "image": "1.IceCreamImages/CheshireSwamp.jpg",
+        "description": "Vanilla ice cream with M&Ms, Oreos, cookie dough, and chocolate chips \n Big Dipper"
     },
     {
         "id": 4,
-        "name": "Chocolate Fudge",
-        "image": "1.IceCreamImages/chocolate.jpg",
-        "description": "Decadent deep chocolate ice cream swirled with thick fudge ribbons."
+        "name": "Chocolate Chocolate Chip",
+        "image": "1.IceCreamImages/ChocolateChocolateChip.jpg",
+        "description": "Chocolate chip ice cream with chocolate chips \n Big Dipper, Gluten Free"
     }
 ]

@@ -103,7 +103,7 @@
                 currentTarget = flavors[currentIndex];
 
                 // Update indicator text with current target ID
-                document.getElementById('mode-indicator').textContent = `Mode: Chronological (Flavor ID ${currentTarget.id})`;
+                document.getElementById('mode-indicator').textContent = `Mode: Chronological`;
 
                 // Get 3 other random distractors excluding the current target
                 const otherFlavors = flavors.filter(f => f.id !== currentTarget.id);
