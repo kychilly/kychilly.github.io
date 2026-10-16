@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Cream Guessing Game</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <!-- Mode Control Panel -->
+        <div class="control-panel">
+            <span id="mode-indicator">Mode: Chronological</span>
+            <button id="mode-toggle-btn" onclick="togglePlayMode()">Switch to Random Order</button>
+        </div>
+
+        <!-- Question Prompt -->
+        <header class="quiz-header">
+            <h2>Which image is <span id="target-name">...</span>?</h2>
+            <p>Score: <span id="score">0</span></p>
+        </header>
+
+        <!-- 4 Image Choice Cards (Kahoot Style) -->
+        <div class="choices-grid" id="choices-container">
+            <!-- Dynamically populated by JavaScript -->
+        </div>
+
+        <!-- Description Box -->
+        <div id="feedback-card" class="feedback-card hidden">
+            <h3 id="feedback-result"></h3>
+            <p id="flavor-description"></p>
+            <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <script>
+        let flavors = [];
+        let currentTarget = null;
+        let score = 0;
+        let currentIndex = 0; // Tracks current position for chronological order
+        let isRandomMode = false; // False = Chronological, True = Random
+
+        // Load ice cream data from the nested json directory
+        async function loadGameData() {
+            try {
+                const response = await fetch('../1.iceCreamJson/flavors.json');
+                flavors = await response.json();
+
+                // Sort by ID to ensure strict chronological order start
+                flavors.sort((a, b) => a.id - b.id);
+
+                nextQuestion();
+            } catch (err) {
+                console.error("Error loading flavors.json:", err);
+            }
+        }
+
+        function togglePlayMode() {
+            isRandomMode = !isRandomMode;
+            const btn = document.getElementById('mode-toggle-btn');
+            const indicator = document.getElementById('mode-indicator');
+
+            if (isRandomMode) {
+                btn.textContent = "Switch to Chronological Order";
+                indicator.textContent = "Mode: Random Order";
+            } else {
+                btn.textContent = "Switch to Random Order";
+                indicator.textContent = "Mode: Chronological (ID " + (flavors[currentIndex]?.id || 1) + ")";
+                currentIndex = 0; // Reset back to start when switching back to chronological
+            }
+            nextQuestion();
+        }
+
+        function getRandomItems(arr, count) {
+            const shuffled = [...arr].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function nextQuestion() {
+            document.getElementById('feedback-card').classList.add('hidden');
+            document.getElementById('flavor-description').textContent = '';
+            document.getElementById('feedback-result').textContent = '';
+
+            if (flavors.length < 4) {
+                alert("Please add at least 4 ice cream entries to your dataset!");
+                return;
+            }
+
+            let options = [];
+
+            if (isRandomMode) {
+                // Random Mode: Pick any random target and 3 random distractors
+                options = getRandomItems(flavors, 4);
+                currentTarget = options[Math.floor(Math.random() * options.length)];
+            } else {
+                // Chronological Mode: Go strictly by ID index
+                if (currentIndex >= flavors.length) {
+                    alert("You've gone through all the ice creams! Restarting from ID 1.");
+                    currentIndex = 0;
+                }
+
+                currentTarget = flavors[currentIndex];
+
+                // Update indicator text with current target ID
+                document.getElementById('mode-indicator').textContent = `Mode: Chronological (Flavor ID ${currentTarget.id})`;
+
+                // Get 3 other random distractors excluding the current target
+                const otherFlavors = flavors.filter(f => f.id !== currentTarget.id);
+                const distractors = getRandomItems(otherFlavors, 3);
+
+                // Combine target + 3 distractors and shuffle them for the 4 grid blocks
+                options = [currentTarget, ...distractors].sort(() => 0.5 - Math.random());
+
+                currentIndex++; // Advance index for the next round
+            }
+
+            document.getElementById('target-name').textContent = currentTarget.name;
+
+            const choicesContainer = document.getElementById('choices-container');
+            choicesContainer.innerHTML = '';
+
+            options.forEach((item, index) => {
+                const choiceBtn = document.createElement('div');
+                choiceBtn.className = `choice-card color-${index + 1}`;
+                choiceBtn.onclick = () => handleChoice(item, choiceBtn);
+
+                const img = document.createElement('img');
+                img.src = '../' + item.image;
+                img.alt = item.name;
+
+                choiceBtn.appendChild(img);
+                choicesContainer.appendChild(choiceBtn);
+            });
+        }
+
+        function handleChoice(selectedItem, cardElement) {
+            const feedbackCard = document.getElementById('feedback-card');
+            const resultText = document.getElementById('feedback-result');
+            const descText = document.getElementById('flavor-description');
+
+            const allChoices = document.querySelectorAll('.choice-card');
+            allChoices.forEach(card => card.style.pointerEvents = 'none');
+
+            if (selectedItem.id === currentTarget.id) {
+                score++;
+                document.getElementById('score').textContent = score;
+                resultText.textContent = "✨ Correct!";
+                resultText.className = "correct-text";
+            } else {
+                resultText.textContent = `❌ Oops! That was ${selectedItem.name}.`;
+                resultText.className = "wrong-text";
+            }
+
+            descText.textContent = `${currentTarget.name}: ${currentTarget.description}`;
+            feedbackCard.classList.remove('hidden');
+        }
+
+        window.onload = loadGameData;
+    </script>
+</body>
+</html>

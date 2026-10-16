@@ -167,3 +167,31 @@ footer {
     border-top: 1px solid #30363d;
     padding-top: 20px;
 }
+
+.control-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-weight: bold;
+    color: #333;
+}
+
+#mode-toggle-btn {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+#mode-toggle-btn:hover {
+    background-color: #e07b00;
+}

@@ -1,16 +1,35 @@
-c# This is a sample Python script.
+import json
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Ice Cream entires here
+ice_cream_data = [
+    {
+        "id": 1,
+        "name": "Vanilla Bean",
+        "image": "1.IceCreamImages/vanilla.jpg",
+        "description": "Rich and creamy vanilla ice cream made with real Madagascar vanilla bean specks."
+    },
+    {
+        "id": 2,
+        "name": "Mint Chocolate Chip",
+        "image": "1.IceCreamImages/mint_chip.jpg",
+        "description": "Refreshing mint ice cream loaded with semi-sweet chocolate chunks."
+    },
+    {
+        "id": 3,
+        "name": "Strawberry",
+        "image": "1.IceCreamImages/strawberry.jpg",
+        "description": "Made with sweet ripe strawberries blended into a smooth, creamy base."
+    },
+    {
+        "id": 4,
+        "name": "Chocolate Fudge",
+        "image": "1.IceCreamImages/chocolate.jpg",
+        "description": "Decadent deep chocolate ice cream swirled with thick fudge ribbons."
+    }
+]
 
+# Stores to 1.iceCreamJson in json file
+with open('1.iceCreamJson/flavors.json', 'w') as f:
+    json.dump(ice_cream_data, f, indent=4)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print("1.flavors.json generated successfully!")

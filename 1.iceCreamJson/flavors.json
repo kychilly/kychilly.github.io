@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Vanilla Bean",
+        "image": "1.IceCreamImages/vanilla.jpg",
+        "description": "Rich and creamy vanilla ice cream made with real Madagascar vanilla bean specks."
+    },
+    {
+        "id": 2,
+        "name": "Mint Chocolate Chip",
+        "image": "1.IceCreamImages/mint_chip.jpg",
+        "description": "Refreshing mint ice cream loaded with semi-sweet chocolate chunks."
+    },
+    {
+        "id": 3,
+        "name": "Strawberry",
+        "image": "1.IceCreamImages/strawberry.jpg",
+        "description": "Made with sweet ripe strawberries blended into a smooth, creamy base."
+    },
+    {
+        "id": 4,
+        "name": "Chocolate Fudge",
+        "image": "1.IceCreamImages/chocolate.jpg",
+        "description": "Decadent deep chocolate ice cream swirled with thick fudge ribbons."
+    }
+]
