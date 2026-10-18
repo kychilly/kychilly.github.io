@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Paper Viewer - Jeffrey Yam</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .pdf-container {
+            width: 100%;
+            height: 85vh;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #30363d;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .paper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<section class="section">
+    <div class="paper-header">
+        <h2>LM Hallucinations Research</h2>
+        <a href="../papers/paper4.pdf" download class="btn" style="color: #58a6ff; text-decoration: none;">Download PDF</a>
+    </div>
+
+    <!-- Embedded PDF Viewer Tab -->
+    <div class="pdf-container">
+        <iframe id="pdf-frame" src="" type="application/pdf">
+            <p>Your browser does not support embedded PDFs. <a href="../papers/paper4.pdf">Click here to download the PDF.</a></p>
+        </iframe>
+    </div>
+</section>
+
+<section class="hero" style="margin-top: 20px;">
+    <div class="cta-buttons">
+        <a href="research.html" class="btn primary">Back to Research</a>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Jeffrey Yam.</p>
+</footer>
+
+<!-- Dynamic script to load the correct PDF based on URL parameters -->
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const paperFile = urlParams.get('file');
+    if (paperFile) {
+        document.getElementById('pdf-frame').src = '../papers/' + paperFile;
+    } else {
+        // Fallback default paper
+        document.getElementById('pdf-frame').src = '../papers/paper4.pdf';
+    }
+</script>
+
+</body>
+</html>
